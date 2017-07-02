@@ -51,7 +51,7 @@ training:
 # testing data
 testing:
     dir: HED-BSDS
-    list: HED-BSDS/test-random.lst
+    list: HED-BSDS/test.lst
     #
     image_width: 480
     image_height: 320
