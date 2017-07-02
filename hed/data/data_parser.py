@@ -68,7 +68,7 @@ class DataParser():
 
             em = np.array(em.convert('L'), dtype=np.float32)
 
-            if self.cfgs['targe_regression']:
+            if self.cfgs['target_regression']:
                 bin_em = em / 255.0
             else:
                 bin_em = np.zeros_like(em)
@@ -82,7 +82,5 @@ class DataParser():
             images.append(im)
             edgemaps.append(bin_em)
             filenames.append(self.samples[b])
-
-        # self.io.print_warning('Batch generated in {:.5f}s'.format(time.time() - tstart))
 
         return images, edgemaps, filenames

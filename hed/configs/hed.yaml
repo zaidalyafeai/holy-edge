@@ -35,7 +35,7 @@ learning_rate_decay: 0.1
 # Setting to false only loss after last conv layer is computed
 deep_supervision: True
 # Targets are continous if True else binary {0, 1}
-targe_regression: True
+target_regression: True
 # Mean pixel value to subtract from BGR image
 mean_pixel_value: [103.939, 116.779, 123.68]
 # RGB to BGR (VGG-16 trained with BGR blame OpenCV)
