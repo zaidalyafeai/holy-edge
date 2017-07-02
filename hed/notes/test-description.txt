@@ -1,2 +1,0 @@
-The task is a bit open ended, and can be conveyed in just one sentence.
- Reimplement “Holistically-Nested Edge Detection” (https://github.com/s9xie/hed) in Tensorflow.

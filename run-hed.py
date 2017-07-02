@@ -28,7 +28,8 @@ def main(args):
         parser.print_help()
         return
 
-    session = get_session(args.gpu_limit)
+    if args.run_test or args.run_train:
+        session = get_session(args.gpu_limit)
 
     if args.run_train:
 
