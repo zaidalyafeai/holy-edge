@@ -1,0 +1,41 @@
+model_name: vgg16
+model_weights_path: /nas2/models/vgg16/vgg16.npy
+# parameters from the paper
+batch_size_train: 10
+batch_size_test: 10
+train_split: 0.8
+optimizer: 'sgd'
+optimizer_params:
+    momentum: 0.9
+    learning_rate: 0.000001
+    weight_decay: 0.0002
+loss_weights: 1.0
+max_iterations: 100000
+epoc_size: 5000
+save_interval: 500
+test_interval: 10
+save_dir: /nas2/harsimrat/hed-testing-deconv
+learning_rate_decay: 0.1
+# Mean pixel value to subtract from BGR image
+mean_pixel_value: [103.939, 116.779, 123.68]
+# RGB to BGR
+channel_swap: [2, 1, 0]
+training:
+    dir: /nas2/datasets/HED-BSDS
+    list: /nas2/datasets/HED-BSDS/train_pair.lst
+    #
+    image_width: 480
+    image_height: 480
+    n_channels: 3
+testing:
+    dir: /nas2/datasets/HED-BSDS
+    list: /nas2/datasets/HED-BSDS/test.lst
+    #
+    image_width: 480
+    image_height: 320
+    n_channels: 3
+test_snapshot: 9500
+test_output: /nas2/harsimrat/hed-testing/test/model-9500
+testing_threshold: 0.6
+test_output_layer: -1
+test_samples: 5
