@@ -81,7 +81,7 @@ feh <test_output>
 ```
 
 ## Testing with pre-trained model
-Edit your config file to change the location of the pre-trained HED model
+Edit your config file `hed/configs/hed.yaml` to change the location of the pre-trained HED model
 
 ```
 save_dir: <path_to_repo_on_disk>/hed
