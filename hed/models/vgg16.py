@@ -214,7 +214,7 @@ class Vgg16():
         self.predictions.append(fuse_output)
         self.loss += (self.cfgs['loss_weights'] * fuse_cost)
 
-        pred = tf.cast(tf.greater(fuse_output, self.cfgs['testing_threshold']), tf.int32, name='predictions')
+        pred = tf.cast(tf.greater(fuse_output, 0.5), tf.int32, name='predictions')
         error = tf.cast(tf.not_equal(pred, tf.cast(self.edgemaps, tf.int32)), tf.float32)
         self.error = tf.reduce_mean(error, name='pixel_error')
 

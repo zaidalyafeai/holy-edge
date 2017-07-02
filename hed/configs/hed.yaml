@@ -5,9 +5,9 @@ rar_file: 'http://vcl.ucsd.edu/hed/HED-BSDS.tar'
 # location where HED-BSDS.tar would be downloaded and decompressed (Should already exist)
 download_path: '/home/harsimrat/hed-data'
 # location of snapshot and tensorbaord summary events (Should already exist)
-save_dir: /nas2/harsimrat/hed-testing-deconv-hist-regression
+save_dir: /nas2/harsimrat/hed-testing-deconv-hist-4
 # location where to put the generated edgemaps during testing (Should already exist)
-test_output: /nas2/harsimrat/hed-testing-deconv-hist-regression/test/model-800
+test_output: /nas2/harsimrat/hed-testing-deconv-hist-4/test/model-5000
 # parameters from the paper
 model_weights_path: vgg16.npy
 # training batch size, decide with your GPU size
@@ -51,14 +51,12 @@ training:
 # testing data
 testing:
     dir: HED-BSDS
-    list: HED-BSDS/test.lst
+    list: HED-BSDS/test-random.lst
     #
     image_width: 480
     image_height: 320
     n_channels: 3
 # use snapshot after test_snapshot intervals for testing
-test_snapshot: 800
+test_snapshot: 5000
 # Apply testing_threshold after sigmoid to generate binary maps set to 0.0 for continous valued edge maps
 testing_threshold: 0.0
-# randomly select test_samples images to tes from testing:list
-test_samples: 10
