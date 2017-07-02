@@ -78,10 +78,6 @@ class Vgg16():
         self.fuse = self.conv_layer(tf.concat(self.side_outputs, axis=3),
                                     w_shape, name='fuse_1', use_bias=False)
 
-        # self.fuse = tf.layers.conv2d(tf.concat(self.side_outputs, axis=3), 1, 1, 1,
-        #                              padding='SAME', activation=tf.identity, use_bias=False,
-        #                              kernel_initializer=tf.constant_initializer(0.2), name='fuse_1')
-
         self.io.print_info('Added FUSE layer')
 
         # complete output maps from side layer and fuse layers
@@ -143,20 +139,10 @@ class Vgg16():
             1x1 conv followed with Deconvoltion layer to upscale the output
         """
         with tf.variable_scope(name):
-            #
+
             in_shape = inputs.shape.as_list()
             w_shape = [1, 1, in_shape[-1], 1]
             reduction = self.conv_layer(inputs, w_shape, b_shape=1, name=name)
-
-            # reduction = tf.layers.conv2d(inputs, 1, 1, 1,
-            #                              padding='SAME', activation=None, use_bias=True,
-            #                              kernel_initializer=tf.constant_initializer(),
-            #                              bias_initializer=tf.constant_initializer(),
-            #                              name=name + '_reduction')
-
-            # return tf.layers.conv2d_transpose(reduction, 1, [upscale * 2, upscale * 2],
-            #                                   strides=[upscale, upscale], use_bias=False,
-            #                                   padding='SAME', kernel_initializer=tf.truncated_normal_initializer(stddev=0.1), name=name)
 
             return self.deconv_layer(reduction, upscale, name)
 
