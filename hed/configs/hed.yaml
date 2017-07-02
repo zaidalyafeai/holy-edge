@@ -1,5 +1,6 @@
 # Before you do anything please set download_path
 # or the location where you have downloaded the rar_file
+# snapshot for now : /nas2/harsimrat/hed-testing-deconv-hist-4/models/hed-model-5000
 rar_file: 'http://vcl.ucsd.edu/hed/HED-BSDS.tar'
 # location where HED-BSDS.tar would be downloaded and decompressed
 download_path: '/home/harsimrat/hed-data'
@@ -41,5 +42,5 @@ testing:
     image_height: 320
     n_channels: 3
 test_snapshot: 5000
-testing_threshold: 0.6
+testing_threshold: 0.7
 test_samples: 10
