@@ -53,6 +53,9 @@ VGG base model available [here](https://github.com/machrisaa/tensorflow-vgg) is 
 ## Training
 Launch training 
 ```
+export OMP_NUM_THREADS=1
+```
+```
 CUDA_VISIBLE_DEVICES=0 python run-hed.py --train --config-file hed/configs/hed.yaml
 ```
 Launch tensorboard
