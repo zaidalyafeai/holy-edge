@@ -2,7 +2,7 @@
 
 Created by Harsimrat Sandhawalia
 
-This repository contains tensorflow implementation of the [HED model](https://github.com/s9xie/hed). Details of hyperparamters are available in the [paper](https://arxiv.org/pdf/1504.06375.pdf)
+This repository contains tensorflow implementation of the [HED model](https://github.com/s9xie/hed). Details of hyper-paramters are available in the [paper](https://arxiv.org/pdf/1504.06375.pdf)
 
     @InProceedings{xie15hed,
       author = {"Xie, Saining and Tu, Zhuowen"},
@@ -26,7 +26,7 @@ pip install -r requirements.txt
 ## Setting up
 
 Edit the [config file](https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/configs/hed.yaml) located at hed/configs/hed.yaml. Set the paths below. Make sure the directories exist and you have read/write permissions on them.
-The HED model is trained on [augumented training](http://vcl.ucsd.edu/hed/HED-BSDS.tar) set created by the authors.
+The HED model is trained on [augmented training](http://vcl.ucsd.edu/hed/HED-BSDS.tar) set created by the authors.
 ```
 # location where training data : http://vcl.ucsd.edu/hed/HED-BSDS.tar would be downloaded and decompressed
 download_path: '<path>'
@@ -37,7 +37,7 @@ test_output: '<path>'
 ```
 
 ## Training data & Models
-You can train the model youself or you can fetch a pre-trained snapshot provided in the repo
+You can train the model or you can fetch a pre-trained HED snapshot provided in the repo to simply generate edgemaps.
 
 Fetch VGG-16 models weights trained on ImageNet via git-lfs
 ```
@@ -70,7 +70,7 @@ tensorboard --logdir=<save_dir>
 ```
 
 ## Testing
-Edit the snapshot you want to use for testing in `hed/configs/hed.yaml`
+Edit the snapshot you want to use for testing in hed/configs/hed.yaml
 
 ```
 test_snapshot: <snapshot number>
@@ -81,7 +81,7 @@ feh <test_output>
 ```
 
 ## Testing with pre-trained model
-Edit your config file `hed/configs/hed.yaml` to change the location of the pre-trained HED model
+Edit your config file to change the location of the pre-trained HED model
 
 ```
 save_dir: <path_to_repo_on_disk>/hed
