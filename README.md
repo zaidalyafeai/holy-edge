@@ -17,7 +17,7 @@ git clone https://github.com/harsimrat-eyeem/holy-edge.git
 ```
 
 ## Installing requirements
-Its recommended to install the requirements in a [conda virtual invironment](https://conda.io/docs/using/envs.html#create-an-environment)
+Its recommended to install the requirements in a [conda virtual environment](https://conda.io/docs/using/envs.html#create-an-environment)
 ```
 cd holy-edge
 pip install -r requirements.txt
