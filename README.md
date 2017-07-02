@@ -11,5 +11,40 @@ This repository contains tensorflow implementation of the [HED model](https://gi
       Year  = {2015},
     }
 
+## Get this repo
+```
+git clone https://github.com/harsimrat-eyeem/holy-edge.git
+```
+
+## Installing requirements
+Its recommended to install the requirements in a [conda virtual invironment](https://conda.io/docs/using/envs.html#create-an-environment) 
+```
+cd holy-edge
+pip install -r requirements.txt
+```
+
+## Setting up
+
+Edit the [config file](https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/configs/hed.yaml) located at hed/configs/hed.yaml. Set the following paths. Make sure the directories exist and you have read/write permissions on them.
+```
+# location where HED-BSDS.tar would be downloaded and decompressed
+download_path: '<path>'
+# location of snapshot and tensorbaord summary events 
+save_dir: '<path>'
+# location where to put the generated edgemaps during testing
+test_output: '<path>'
+```
+
+## Training data & Models
+
+0. Fetch VGG-16 models weights via git-lfs
+```
+git lfs fetch && git lfs pull
+```
+1. Download training data via following
+```
+python run-hed.py --download-data --config-file hed/configs/hed.yaml
+```
+
 ## VGG-16 base model
-VGG base model available [here](https://github.com/machrisaa/tensorflow-vgg) is used for producing multi-level features. The model is modified according with Section 3. of the [paper](https://arxiv.org/pdf/1504.06375.pdf). Deconvolution layers are set with [tf.nn.conv2d_transpose](https://www.tensorflow.org/api_docs/python/tf/nn/conv2d_transpose). The model uses single deconvolution layer in each side layers. Another implementation uses [stacked](https://github.com/ppwwyyxx/tensorpack/blob/master/examples/HED/hed.py#L35) bilinear deconvolution layers. In this implementation the upsampling parameters are learned while finetuning of the model. Pre-trained weights for [VGG-16](https://mega.nz/#!YU1FWJrA!O1ywiCS2IiOlUCtCpI6HTJOMrneN-Qdv3ywQP5poecM) are hosted with [git-lfs]() in this repo. 
+VGG base model available [here](https://github.com/machrisaa/tensorflow-vgg) is used for producing multi-level features. The model is modified according with Section (3.) of the [paper](https://arxiv.org/pdf/1504.06375.pdf). Deconvolution layers are set with [tf.nn.conv2d_transpose](https://www.tensorflow.org/api_docs/python/tf/nn/conv2d_transpose). The model uses single deconvolution layer in each side layers. Another implementation uses [stacked](https://github.com/ppwwyyxx/tensorpack/blob/master/examples/HED/hed.py#L35) bilinear deconvolution layers. In this implementation the upsampling parameters are learned while finetuning of the model. Pre-trained weights for [VGG-16](https://mega.nz/#!YU1FWJrA!O1ywiCS2IiOlUCtCpI6HTJOMrneN-Qdv3ywQP5poecM) are hosted with [git-lfs](https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/models/vgg16.npy) in this repo. 
