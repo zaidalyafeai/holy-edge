@@ -21,11 +21,12 @@ Its recommended to install the requirements in a [conda virtual environment](htt
 ```
 cd holy-edge
 pip install -r requirements.txt
+export OMP_NUM_THREADS=1
 ```
 
 ## Setting up
 
-Edit the [config file](https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/configs/hed.yaml) located at hed/configs/hed.yaml. Set the paths below. Make sure the directories exist and you have read/write permissions on them.
+Edit the [config file](https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/configs/hed.yaml) located at `hed/configs/hed.yaml`. Set the paths below. Make sure the directories exist and you have read/write permissions on them.
 The HED model is trained on [augmented training](http://vcl.ucsd.edu/hed/HED-BSDS.tar) set created by the authors.
 ```
 # location where training data : http://vcl.ucsd.edu/hed/HED-BSDS.tar would be downloaded and decompressed
@@ -59,9 +60,6 @@ If you want to run predictions on pre-trained HED model, skip this and go to `Te
 
 Launch training
 ```
-export OMP_NUM_THREADS=1
-```
-```
 CUDA_VISIBLE_DEVICES=0 python run-hed.py --train --config-file hed/configs/hed.yaml
 ```
 Launch tensorboard
@@ -70,7 +68,7 @@ tensorboard --logdir=<save_dir>
 ```
 
 ## Testing
-Edit the snapshot you want to use for testing in hed/configs/hed.yaml
+Edit the snapshot you want to use for testing in `hed/configs/hed.yaml`
 
 ```
 test_snapshot: <snapshot number>
@@ -81,11 +79,13 @@ feh <test_output>
 ```
 
 ## Testing with pre-trained model
-Edit your config file to change the location of the pre-trained HED model
+Edit your config file located at `hed/configs/hed.yaml` to change the location of the pre-trained HED model
 
 ```
 save_dir: <path_to_repo_on_disk>/hed
 test_snapshot: 5000
+# location where to put the generated edgemaps during testing
+test_output: '<path>'
 ```
 
 Run predictions
