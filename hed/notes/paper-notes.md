@@ -10,6 +10,7 @@ Crux of the idea from : https://arxiv.org/abs/1504.06375
 7. `[Question]` : Change GT to be the consensus of atleast three annotators. Noisy/small scale edge have lower consensus
 8. Rotate images to 16 different angles + largest crop to augment data since training sets are small (Authors provided the data-set which already has augmentation applied)
 9. No use of Mean-shift to find thinner edge/post processing for now.
-10. `[Question]`: Treat edge pixel labelling problem as regression or binary classification ?
-11. `[Question]`: The authors use different learning for side layers. Is that needed ?
-12. `[Question]`: Output from layer 5 dont look took well ?
+10. `[Question]`: Treat edge detection problem as regression or binary classification ?
+11. `[Question]`: The authors use different learning for differnent levels in the network side layers. Is that needed ?
+12. `[Question]`: Output from layer 5 dont look as good as in the paper?
+12. `[Question]`: Rather than using single deconv at each output layer, use stacked deconv with non-linearity?
