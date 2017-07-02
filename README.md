@@ -46,7 +46,7 @@ md5sum hed/models/vgg16.npy
 ```
 `19ff134af12b6ea0c0ff35664b031ba5  hed/models/vgg16.npy`
 
-Download training data via following. This downloads the augumented training set created by authors of HED. Augumenation include rotation to 16 predefined angles and cropping largest rectangle from the image. Details in section (4.1)
+This downloads the augmented training set created by authors of HED. Augmentation strategies include rotation to 16 predefined angles and cropping largest rectangle from the image. Details in section (4.1). To download training data run
 ```
 python run-hed.py --download-data --config-file hed/configs/hed.yaml
 ```
@@ -55,6 +55,8 @@ python run-hed.py --download-data --config-file hed/configs/hed.yaml
 VGG base model available [here](https://github.com/machrisaa/tensorflow-vgg) is used for producing multi-level features. The model is modified according with Section (3.) of the [paper](https://arxiv.org/pdf/1504.06375.pdf). Deconvolution layers are set with [tf.nn.conv2d_transpose](https://www.tensorflow.org/api_docs/python/tf/nn/conv2d_transpose). The model uses single deconvolution layer in each side layers. Another implementation uses [stacked](https://github.com/ppwwyyxx/tensorpack/blob/master/examples/HED/hed.py#L35) bilinear deconvolution layers. In this implementation the upsampling parameters are learned while finetuning of the model. Pre-trained weights for [VGG-16](https://mega.nz/#!YU1FWJrA!O1ywiCS2IiOlUCtCpI6HTJOMrneN-Qdv3ywQP5poecM) are hosted with [git-lfs](https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/models/vgg16.npy) in this repo.
 
 ## Training
+If you want to run predictions on pre-trained HED model, skip this and go to `Testing with pre-trained model`
+
 Launch training
 ```
 export OMP_NUM_THREADS=1
@@ -69,6 +71,7 @@ tensorboard --logdir=<save_dir>
 
 ## Testing
 Edit the snapshot you want to use for testing in hed/configs/hed.yaml
+
 ```
 test_snapshot: <snapshot number>
 ```
@@ -78,8 +81,8 @@ feh <test_output>
 ```
 
 ## Testing with pre-trained model
-
 Edit your config file to change the location of the pre-trained HED model
+
 ```
 save_dir: <path_to_repo_on_disk>/hed
 test_snapshot: 5000
