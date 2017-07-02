@@ -57,7 +57,7 @@ class HEDTester():
 
         filepath = os.path.join(self.cfgs['download_path'], self.cfgs['testing']['list'])
         train_list = self.io.read_file_list(filepath)
-        np.random.shuffle(train_list)
+        # np.random.shuffle(train_list)
 
         self.io.print_info('Writing PNGs at {}'.format(self.cfgs['test_output']))
 

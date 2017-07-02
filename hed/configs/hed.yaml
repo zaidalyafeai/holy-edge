@@ -7,7 +7,7 @@ download_path: '/home/harsimrat/hed-data'
 # location of snapshot and tensorbaord summary events
 save_dir: /nas2/harsimrat/hed-testing-deconv-hist-4
 # location where to put the generated edgemaps during testing
-test_output: /nas2/harsimrat/hed-testing/test/model-5000
+test_output: /nas2/harsimrat/hed-testing-deconv-hist-4/test/model-500
 # parameters from the paper
 model_weights_path: vgg16.npy
 batch_size_train: 10
@@ -23,6 +23,7 @@ loss_weights: 1.0
 save_interval: 100
 test_interval: 10
 learning_rate_decay: 0.1
+deep_supervision: False
 # Mean pixel value to subtract from BGR image
 mean_pixel_value: [103.939, 116.779, 123.68]
 # RGB to BGR
@@ -41,6 +42,6 @@ testing:
     image_width: 480
     image_height: 320
     n_channels: 3
-test_snapshot: 5000
+test_snapshot: 500
 testing_threshold: 0.7
 test_samples: 10

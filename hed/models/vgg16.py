@@ -141,7 +141,7 @@ class Vgg16():
     def side_layer(self, inputs, name, upscale):
         """
             https://github.com/s9xie/hed/blob/9e74dd710773d8d8a469ad905c76f4a7fa08f945/examples/hed/train_val.prototxt#L122
-            1x1 conv followed with Deconvoltion layer to upscale the output
+            1x1 conv followed with Deconvoltion layer to upscale the size of input image sans color
         """
         with tf.variable_scope(name):
 
@@ -198,14 +198,23 @@ class Vgg16():
         self.predictions = []
         self.loss = 0
 
-        for idx, b in enumerate(self.outputs):
+        self.io.print_warning('Deep supervision application set to {}'.format(self.cfgs['deep_supervision']))
+
+        for idx, b in enumerate(self.side_outputs):
             output = tf.nn.sigmoid(b, name='output_{}'.format(idx))
             cost = sigmoid_cross_entropy_balanced(b, self.edgemaps, name='cross_entropy{}'.format(idx))
 
             self.predictions.append(output)
-            self.loss += (self.cfgs['loss_weights'] * cost)
+            if self.cfgs['deep_supervision']:
+                self.loss += (self.cfgs['loss_weights'] * cost)
 
-        pred = tf.cast(tf.greater(self.predictions[-1], self.cfgs['testing_threshold']), tf.int32, name='predictions')
+        fuse_output = tf.nn.sigmoid(self.fuse, name='fuse')
+        fuse_cost = sigmoid_cross_entropy_balanced(self.fuse, self.edgemaps, name='cross_entropy_fuse')
+
+        self.predictions.append(fuse_output)
+        self.loss += (self.cfgs['loss_weights'] * fuse_cost)
+
+        pred = tf.cast(tf.greater(fuse_output, self.cfgs['testing_threshold']), tf.int32, name='predictions')
         error = tf.cast(tf.not_equal(pred, tf.cast(self.edgemaps, tf.int32)), tf.float32)
         self.error = tf.reduce_mean(error, name='pixel_error')
 

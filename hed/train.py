@@ -34,7 +34,8 @@ class HEDTrainer():
             self.io.print_info('Done initializing VGG-16 model')
 
             dirs = ['train', 'val', 'test', 'models']
-            _ = [os.mkdirs(os.path.join(self.cfgs['save_dir'] + '/{}'.format(p))) for d in dirs]
+            dirs = [os.path.join(self.cfgs['save_dir'] + '/{}'.format(d)) for d in dirs]
+            _ = [os.makedirs(d) for d in dirs if not os.path.exists(d)]
 
         except Exception as err:
 

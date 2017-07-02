@@ -3,6 +3,7 @@ import tensorflow as tf
 
 def sigmoid_cross_entropy_balanced(logits, label, name='cross_entropy_loss'):
     """
+    Implements Equation [2] in https://arxiv.org/pdf/1504.06375.pdf
     Compute edge pixels for each training sample and set as pos_weights to
     tf.nn.weighted_cross_entropy_with_logits
     """
