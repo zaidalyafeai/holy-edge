@@ -11,3 +11,4 @@ Crux of the idea from : https://arxiv.org/abs/1504.06375
 8. Rotate images to 16 different angles + largest crop to augment data since training sets are small (Authors provided the data-set which already has augmentation applied)
 9. No use of Mean-shift to find thinner edge/post processing for now.
 10. `[Question]`: Treat edge pixel labelling problem as regression or binary classification ?
+11. `[Question]`: The authors use different learning for side layers. Is that needed ?
