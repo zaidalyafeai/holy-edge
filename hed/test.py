@@ -79,6 +79,8 @@ class HEDTester():
 
         for idx, em in enumerate(em_maps):
 
+            em[em < self.cfgs['testing_threshold']] = 0.0
+
             em = 255.0 * (1.0 - em)
             em = np.tile(em, [1, 1, 3])
 
