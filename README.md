@@ -43,8 +43,8 @@ Fetch VGG-16 models weights trained on ImageNet via git-lfs
 ```
 git lfs fetch && git lfs pull
 md5sum hed/models/vgg16.npy
-19ff134af12b6ea0c0ff35664b031ba5  hed/models/vgg16.npy
 ```
+`19ff134af12b6ea0c0ff35664b031ba5  hed/models/vgg16.npy`
 
 Download training data via following. This downloads the augumented training set created by authors of HED. Augumenation include rotation to 16 predefined angles and cropping largest rectangle from the image. Details in section (4.1)
 ```
