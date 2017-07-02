@@ -18,7 +18,10 @@ class Vgg16():
         self.cfgs = cfgs
         self.io = IO()
 
-        self.data_dict = np.load(self.cfgs['model_weights_path'], encoding='latin1').item()
+        base_path = os.path.abspath(os.path.dirname(__file__))
+        weights_file = os.path.join(base_path, self.cfgs['model_weights_path'])
+
+        self.data_dict = np.load(weights_file, encoding='latin1').item()
         self.io.print_info("Model weights loaded from {}".format(self.cfgs['model_weights_path']))
 
         self.images = tf.placeholder(tf.float32, [None, self.cfgs[run]['image_height'], self.cfgs[run]['image_width'], self.cfgs[run]['n_channels']])

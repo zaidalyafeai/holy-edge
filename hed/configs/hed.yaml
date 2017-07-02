@@ -1,5 +1,5 @@
 model_name: vgg16
-model_weights_path: /nas2/models/vgg16/vgg16.npy
+model_weights_path: vgg16.npy
 # parameters from the paper
 batch_size_train: 10
 batch_size_test: 10
