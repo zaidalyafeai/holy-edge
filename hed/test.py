@@ -19,6 +19,7 @@ class HEDTester():
     def __init__(self, config_file):
 
         self.io = IO()
+        self.init = True
 
         try:
             pfile = open(config_file)
@@ -36,6 +37,7 @@ class HEDTester():
             self.model = Vgg16(self.cfgs, run='testing')
 
             meta_model_file = os.path.join(self.cfgs['save_dir'], 'models/hed-model-{}'.format(self.cfgs['test_snapshot']))
+
             saver = tf.train.Saver()
             saver.restore(session, meta_model_file)
 
@@ -44,14 +46,18 @@ class HEDTester():
         except Exception as err:
 
             self.io.print_error('Error setting up VGG-16 model, {}'.format(err))
+            self.init = False
 
     def run(self, session):
+
+        if not self.init:
+            return
 
         self.model.setup_testing(session)
 
         filepath = os.path.join(self.cfgs['download_path'], self.cfgs['testing']['list'])
         train_list = self.io.read_file_list(filepath)
-        # np.random.shuffle(train_list)
+        np.random.shuffle(train_list)
 
         self.io.print_info('Writing PNGs at {}'.format(self.cfgs['test_output']))
 

@@ -15,6 +15,7 @@ class HEDTrainer():
     def __init__(self, config_file):
 
         self.io = IO()
+        self.init = True
 
         try:
             pfile = open(config_file)
@@ -32,11 +33,18 @@ class HEDTrainer():
             self.model = Vgg16(self.cfgs)
             self.io.print_info('Done initializing VGG-16 model')
 
+            dirs = ['train', 'val', 'test', 'models']
+            _ = [os.mkdirs(os.path.join(self.cfgs['save_dir'] + '/{}'.format(p))) for d in dirs]
+
         except Exception as err:
 
             self.io.print_error('Error setting up VGG-16 model, {}'.format(err))
+            self.init = False
 
     def run(self, session):
+
+        if not self.init:
+            return
 
         train_data = DataParser(self.cfgs)
 
