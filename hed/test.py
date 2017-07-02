@@ -50,7 +50,9 @@ class HEDTester():
         self.model.setup_testing(session)
 
         train_list = self.io.read_file_list(self.cfgs['testing']['list'])
-        # np.random.shuffle(train_list)
+        np.random.shuffle(train_list)
+
+        self.io.print_info('Writing PNGs at {}'.format(self.cfgs['test_output']))
 
         for idx, img in enumerate(train_list[:self.cfgs['test_samples']]):
 
@@ -61,12 +63,21 @@ class HEDTester():
 
             edgemap = session.run(self.model.predictions, feed_dict={self.model.images: [im]})
 
-            # Take the edge map from the network from side layers and fuse layer
-            fused_edge_map = 255.0 * np.mean(np.array(edgemap), axis=4, keepdims=True)[0][0]
-            em = np.tile(fused_edge_map, [1, 1, 3])
+            self.save_egdemaps(edgemap, idx)
+
+    def save_egdemaps(self, em_maps, index):
+
+        # Take the edge map from the network from side layers and fuse layer
+        em_maps = [e[0] for e in em_maps]
+        em_maps = em_maps + [np.mean(np.array(em_maps), axis=0)]
+
+        for idx, em in enumerate(em_maps):
+
+            em = 255.0 * (1.0 - em)
+            em = np.tile(em, [1, 1, 3])
 
             em = Image.fromarray(np.uint8(em))
-            em.save(os.path.join(self.cfgs['test_output'], 'testing-{}.png'.format(idx)))
+            em.save(os.path.join(self.cfgs['test_output'], 'testing-{}-{:03}.png'.format(index, idx)))
 
     def fetch_image(self, test_image):
 
