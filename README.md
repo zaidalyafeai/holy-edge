@@ -38,11 +38,15 @@ test_output: '<path>'
 
 ## Training data & Models
 You can train the model youself or you can fetch a pre-trained snapshot provided in the repo
-0. Fetch VGG-16 models weights via git-lfs
+
+Fetch VGG-16 models weights trained on ImageNet via git-lfs
 ```
 git lfs fetch && git lfs pull
+md5sum hed/models/vgg16.npy
+19ff134af12b6ea0c0ff35664b031ba5  hed/models/vgg16.npy
 ```
-Download training data via following
+
+Download training data via following. This downloads the augumented training set created by authors of HED. Augumenation include rotation to 16 predefined angles and cropping largest rectangle from the image. Details in section (4.1)
 ```
 python run-hed.py --download-data --config-file hed/configs/hed.yaml
 ```
@@ -68,6 +72,20 @@ Edit the snapshot you want to use for testing in hed/configs/hed.yaml
 ```
 test_snapshot: <snapshot number>
 ```
+```
+CUDA_VISIBLE_DEVICES=1 python run-hed.py --test --config-file hed/configs/hed.yaml --gpu-limit 0.4
+feh <test_output>
+```
+
+## Testing with pre-trained model
+
+Edit your config file to change the location of the pre-trained HED model
+```
+save_dir: <path_to_repo_on_disk>/hed
+test_snapshot: 5000
+```
+
+Run predictions
 ```
 CUDA_VISIBLE_DEVICES=1 python run-hed.py --test --config-file hed/configs/hed.yaml --gpu-limit 0.4
 feh <test_output>
