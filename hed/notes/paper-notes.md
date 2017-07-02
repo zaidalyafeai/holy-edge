@@ -12,3 +12,4 @@ Crux of the idea from : https://arxiv.org/abs/1504.06375
 9. No use of Mean-shift to find thinner edge/post processing for now.
 10. `[Question]`: Treat edge pixel labelling problem as regression or binary classification ?
 11. `[Question]`: The authors use different learning for side layers. Is that needed ?
+12. `[Question]`: Output from layer 5 dont look took well ?
