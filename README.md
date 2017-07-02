@@ -67,7 +67,6 @@ tensorboard --logdir=<save_dir>
 Edit the snapshot you want to use for testing in hed/configs/hed.yaml
 ```
 test_snapshot: <snapshot number>
-test_samples: <number of images to be tested from test list>
 ```
 ```
 CUDA_VISIBLE_DEVICES=1 python run-hed.py --test --config-file hed/configs/hed.yaml --gpu-limit 0.4
