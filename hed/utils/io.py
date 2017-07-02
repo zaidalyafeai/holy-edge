@@ -1,4 +1,7 @@
 import os
+import yaml
+import wget
+from pyunpack import Archive
 from time import strftime, localtime
 from termcolor import colored
 
@@ -8,6 +11,26 @@ class IO():
     def __init__(self, log_dir=None):
 
         self.log_dir = log_dir
+
+    def read_yaml_file(self, config_file):
+
+        pfile = open(config_file)
+        d = yaml.load(pfile)
+        pfile.close()
+
+        return d
+
+    def download_data(self, filepath, outputdir):
+
+        _, rar_file = os.path.split(filepath)
+        rar_file = os.path.join(outputdir, rar_file)
+
+        if not os.path.exists(rar_file):
+            self.print_info('Downloading {} to {}'.format(filepath, rar_file))
+            _ = wget.download(filepath, out=outputdir)
+
+        self.print_info('Decompressing {} to {}'.format(rar_file, outputdir))
+        Archive(rar_file).extractall(outputdir)
 
     def print_info(self, info_string, quite=False):
 

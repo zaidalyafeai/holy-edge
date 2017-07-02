@@ -49,21 +49,21 @@ class HEDTester():
 
         self.model.setup_testing(session)
 
-        train_list = self.io.read_file_list(self.cfgs['testing']['list'])
+        filepath = os.path.join(self.cfgs['download_path'], self.cfgs['testing']['list'])
+        train_list = self.io.read_file_list(filepath)
         # np.random.shuffle(train_list)
 
         self.io.print_info('Writing PNGs at {}'.format(self.cfgs['test_output']))
 
         for idx, img in enumerate(train_list[:self.cfgs['test_samples']]):
 
-            test_filename = os.path.join(self.cfgs['testing']['dir'], img)
-
+            test_filename = os.path.join(self.cfgs['download_path'], self.cfgs['testing']['dir'], img)
             im = self.fetch_image(test_filename)
-            self.io.print_info('Testing {}, {}'.format(test_filename, im.shape))
 
             edgemap = session.run(self.model.predictions, feed_dict={self.model.images: [im]})
-
             self.save_egdemaps(edgemap, idx)
+
+            self.io.print_info('Done testing {}, {}'.format(test_filename, im.shape))
 
     def save_egdemaps(self, em_maps, index):
 

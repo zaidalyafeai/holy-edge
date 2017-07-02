@@ -3,6 +3,7 @@ import os
 import sys
 import argparse
 import tensorflow as tf
+from hed.utils.io import IO
 from hed.test import HEDTester
 from hed.train import HEDTrainer
 
@@ -22,8 +23,8 @@ def get_session(gpu_fraction):
 
 def main(args):
 
-    if not (args.run_train or args.run_test):
-        print 'Set atleast one of the options --train | --test'
+    if not (args.run_train or args.run_test or args.download_data):
+        print 'Set atleast one of the options --train | --test | --download-data'
         parser.print_help()
         return
 
@@ -41,6 +42,12 @@ def main(args):
         tester.setup(session)
         tester.run(session)
 
+    if args.download_data:
+
+        io = IO()
+        cfgs = io.read_yaml_file(args.config_file)
+        io.download_data(cfgs['rar_file'], cfgs['download_path'])
+
 
 if __name__ == '__main__':
 
@@ -48,6 +55,7 @@ if __name__ == '__main__':
     parser.add_argument('--config-file', dest='config_file', type=str, help='Experiment configuration file')
     parser.add_argument('--train', dest='run_train', action='store_true', default=False, help='Launch training')
     parser.add_argument('--test', dest='run_test', action='store_true', default=False, help='Launch testing on a list of images')
+    parser.add_argument('--download-data', dest='download_data', action='store_true', default=False, help='Download training data')
     parser.add_argument('--gpu-limit', dest='gpu_limit', type=float, default=1.0, help='Use fraction of GPU memory (Useful with TensorFlow backend)')
 
     args = parser.parse_args()

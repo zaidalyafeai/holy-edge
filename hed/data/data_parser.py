@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import wget
 import numpy as np
 from PIL import Image
 from hed.utils.io import IO
@@ -12,10 +13,11 @@ class DataParser():
 
         self.io = IO()
         self.cfgs = cfgs
-        self.train_file = cfgs['training']['list']
+        self.train_file = os.path.join(cfgs['download_path'], cfgs['training']['list'])
+        self.train_data_dir = os.path.join(cfgs['download_path'], cfgs['training']['dir'])
         self.training_pairs = self.io.read_file_list(self.train_file)
 
-        self.samples = self.io.split_pair_names(self.training_pairs, self.cfgs['training']['dir'])
+        self.samples = self.io.split_pair_names(self.training_pairs, self.train_data_dir)
         self.io.print_info('Training data set-up from {}'.format(os.path.join(self.train_file)))
         self.n_samples = len(self.training_pairs)
 
