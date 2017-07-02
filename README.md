@@ -1,6 +1,5 @@
 ## Holistically-Nested Edge Detection
-`https://github.com/harsimrat-eyeem/holy-edge`
-Created by Harsimrat Sandhawalia
+The code is also hosted at `https://github.com/harsimrat-eyeem/holy-edge` - Harsimrat Sandhawalia
 
 Input image                |  Final fused Edge maps    |    Edge maps from side layers
 :-------------------------:|:-------------------------:|:-------------------------:
