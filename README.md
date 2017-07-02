@@ -7,8 +7,8 @@ Input image                |  Final fused Edge maps    |    Edge maps from side 
 <img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/35049.jpg" width="480">  |  <img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/animated-7.gif" width="480"> | <img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/animated-levels-7.gif" width="480">
 <img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/201080.jpg" width="480">  |  <img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/animated-9.gif" width="480"> | <img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/animated-levels-9.gif" width="480">
 
-Final fused edge maps generated at 100, 500, 1k, 1.5k, 2k, 2.5k, 3k, 3.5k, 4k, 4.5k iterations. 
-Edge maps form side layer generated at 5k iterations.
+- Final fused edge maps generated at 100, 500, 1k, 1.5k, 2k, 2.5k, 3k, 3.5k, 4k, 4.5k iterations. 
+- Edge maps form side layer generated at 5k iterations.
 
 This repository contains tensorflow implementation of the [HED model](https://github.com/s9xie/hed). Details of hyper-paramters are available in the [paper](https://arxiv.org/pdf/1504.06375.pdf)
 
