@@ -23,7 +23,7 @@ class HEDTrainer():
 
         except Exception as err:
 
-            self.print_error('Error reading config file {}'.format(config_file))
+            print('Error reading config file {}, {}'.format(config_file, err))
 
     def setup(self):
 

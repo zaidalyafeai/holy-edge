@@ -76,7 +76,8 @@ class Vgg16():
 
         w_shape = [1, 1, len(self.side_outputs), 1]
         self.fuse = self.conv_layer(tf.concat(self.side_outputs, axis=3),
-                                    w_shape, name='fuse_1', use_bias=False)
+                                    w_shape, name='fuse_1', use_bias=False,
+                                    w_init=tf.constant_initializer(0.2))
 
         self.io.print_info('Added FUSE layer')
 
@@ -104,34 +105,35 @@ class Vgg16():
             relu = tf.nn.relu(bias)
             return relu
 
-    def conv_layer(self, x, W_shape, b_shape=None, name=None, padding='SAME', use_bias=True):
+    def conv_layer(self, x, W_shape, b_shape=None, name=None,
+                   padding='SAME', use_bias=True, w_init=None, b_init=None):
 
-        W = self.weight_variable(W_shape)
-        if use_bias:
-            b = self.bias_variable([b_shape])
-            tf.summary.histogram('biases_{}'.format(name), b)
-
+        W = self.weight_variable(W_shape, w_init)
         tf.summary.histogram('weights_{}'.format(name), W)
 
         if use_bias:
-            return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding=padding) + b
-        else:
-            return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding=padding)
+            b = self.bias_variable([b_shape], b_init)
+            tf.summary.histogram('biases_{}'.format(name), b)
 
-    def deconv_layer(self, x, upscale, name, padding='SAME'):
+        conv = tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding=padding)
+
+        return conv + b if use_bias else conv
+
+    def deconv_layer(self, x, upscale, name, padding='SAME', w_init=None):
 
         x_shape = tf.shape(x)
         in_shape = x.shape.as_list()
 
-        w_shape = [upscale * 2, upscale * 2, 1, in_shape[-1]]
+        w_shape = [upscale * 2, upscale * 2, in_shape[-1], 1]
         strides = [1, upscale, upscale, 1]
 
-        W = self.weight_variable(w_shape)
+        W = self.weight_variable(w_shape, w_init)
         tf.summary.histogram('weights_{}'.format(name), W)
 
         out_shape = tf.stack([x_shape[0], x_shape[1], x_shape[2], w_shape[2]]) * tf.constant(strides, tf.int32)
+        deconv = tf.nn.conv2d_transpose(x, W, out_shape, strides=strides, padding=padding)
 
-        return tf.nn.conv2d_transpose(x, W, out_shape, strides=strides, padding=padding)
+        return deconv
 
     def side_layer(self, inputs, name, upscale):
         """
@@ -142,9 +144,17 @@ class Vgg16():
 
             in_shape = inputs.shape.as_list()
             w_shape = [1, 1, in_shape[-1], 1]
-            reduction = self.conv_layer(inputs, w_shape, b_shape=1, name=name)
 
-            return self.deconv_layer(reduction, upscale, name)
+            classifier = self.conv_layer(inputs, w_shape, b_shape=1,
+                                         w_init=tf.constant_initializer(),
+                                         b_init=tf.constant_initializer(),
+                                         name=name + '_reduction')
+
+            classifier = self.deconv_layer(classifier, upscale=upscale,
+                                           name='{}_deconv_{}'.format(name, upscale),
+                                           w_init=tf.truncated_normal_initializer(stddev=0.1))
+
+            return classifier
 
     def get_conv_filter(self, name):
         return tf.constant(self.data_dict[name][0], name="filter")
@@ -152,15 +162,15 @@ class Vgg16():
     def get_bias(self, name):
         return tf.constant(self.data_dict[name][1], name="biases")
 
-    def weight_variable(self, shape):
+    def weight_variable(self, shape, initial):
 
-        initial = tf.truncated_normal(shape, stddev=0.1)
-        return tf.Variable(initial)
+        init = initial(shape)
+        return tf.Variable(init)
 
-    def bias_variable(self, shape):
+    def bias_variable(self, shape, initial):
 
-        initial = tf.constant(0.1, shape=shape)
-        return tf.Variable(initial)
+        init = initial(shape)
+        return tf.Variable(init)
 
     def setup_testing(self, session):
 

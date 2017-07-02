@@ -50,7 +50,7 @@ class HEDTester():
         self.model.setup_testing(session)
 
         train_list = self.io.read_file_list(self.cfgs['testing']['list'])
-        np.random.shuffle(train_list)
+        # np.random.shuffle(train_list)
 
         self.io.print_info('Writing PNGs at {}'.format(self.cfgs['test_output']))
 

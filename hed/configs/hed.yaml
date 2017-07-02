@@ -14,7 +14,7 @@ max_iterations: 100000
 epoc_size: 5000
 save_interval: 100
 test_interval: 10
-save_dir: /nas2/harsimrat/hed-testing-deconv-hist-2
+save_dir: /nas2/harsimrat/hed-testing-deconv-hist-4
 learning_rate_decay: 0.1
 # Mean pixel value to subtract from BGR image
 mean_pixel_value: [103.939, 116.779, 123.68]
