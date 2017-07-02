@@ -5,13 +5,16 @@ rar_file: 'http://vcl.ucsd.edu/hed/HED-BSDS.tar'
 # location where HED-BSDS.tar would be downloaded and decompressed
 download_path: '/home/harsimrat/hed-data'
 # location of snapshot and tensorbaord summary events
-save_dir: /nas2/harsimrat/hed-testing-deconv-hist-4
+save_dir: /nas2/harsimrat/hed-testing-deconv-hist-regression
 # location where to put the generated edgemaps during testing
-test_output: /nas2/harsimrat/hed-testing-deconv-hist-4/test/model-500
+test_output: /nas2/harsimrat/hed-testing-deconv-hist-regression/test/model-100
 # parameters from the paper
 model_weights_path: vgg16.npy
+# training batch size, decide with your GPU size
 batch_size_train: 10
-batch_size_test: 10
+# validation batch size, ran every val_interval
+batch_size_val: 10
+# split 30k training images for trainig/validation
 train_split: 0.8
 max_iterations: 100000
 epoc_size: 5000
@@ -21,9 +24,10 @@ optimizer_params:
     weight_decay: 0.0002
 loss_weights: 1.0
 save_interval: 100
-test_interval: 10
+val_interval: 10
 learning_rate_decay: 0.1
-deep_supervision: False
+deep_supervision: True
+targe_regression: True
 # Mean pixel value to subtract from BGR image
 mean_pixel_value: [103.939, 116.779, 123.68]
 # RGB to BGR
@@ -42,6 +46,6 @@ testing:
     image_width: 480
     image_height: 320
     n_channels: 3
-test_snapshot: 500
-testing_threshold: 0.7
+test_snapshot: 100
+testing_threshold: 0.6
 test_samples: 10

@@ -224,4 +224,4 @@ class Vgg16():
         self.merged_summary = tf.summary.merge_all()
 
         self.train_writer = tf.summary.FileWriter(self.cfgs['save_dir'] + '/train', session.graph)
-        self.test_writer = tf.summary.FileWriter(self.cfgs['save_dir'] + '/test')
+        self.val_writer = tf.summary.FileWriter(self.cfgs['save_dir'] + '/val')

@@ -78,13 +78,13 @@ class HEDTrainer():
                 saver = tf.train.Saver()
                 saver.save(session, os.path.join(self.cfgs['save_dir'], 'models/hed-model'), global_step=idx)
 
-            if idx % self.cfgs['test_interval'] == 0:
+            if idx % self.cfgs['val_interval'] == 0:
 
-                im, em, _ = train_data.get_testing_batch()
+                im, em, _ = train_data.get_validation_batch()
 
                 summary, error = session.run([self.model.merged_summary, self.model.error], feed_dict={self.model.images: im, self.model.edgemaps: em})
 
-                self.model.test_writer.add_summary(summary, idx)
-                self.io.print_info('[{}/{}] TESTING error : {}'.format(idx, self.cfgs['max_iterations'], error))
+                self.model.val_writer.add_summary(summary, idx)
+                self.io.print_info('[{}/{}] VALIDATION error : {}'.format(idx, self.cfgs['max_iterations'], error))
 
         self.model.train_writer.close()

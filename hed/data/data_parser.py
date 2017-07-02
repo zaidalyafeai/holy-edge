@@ -36,9 +36,9 @@ class DataParser():
 
         return self.get_batch(batch_ids)
 
-    def get_testing_batch(self):
+    def get_validation_batch(self):
 
-        batch_ids = np.random.choice(self.validation_ids, self.cfgs['batch_size_test'])
+        batch_ids = np.random.choice(self.validation_ids, self.cfgs['batch_size_val'])
 
         return self.get_batch(batch_ids)
 
@@ -63,9 +63,16 @@ class DataParser():
             im -= self.cfgs['mean_pixel_value']
 
             # Labels needs to be 1 or 0 (edge pixel or not)
-            em = np.array(em, dtype=np.float32)
-            bin_em = np.zeros_like(em)
-            bin_em[np.where(em)] = 1
+            # or can use regression targets as done by the author
+            # https://github.com/s9xie/hed/blob/9e74dd710773d8d8a469ad905c76f4a7fa08f945/src/caffe/layers/image_labelmap_data_layer.cpp#L213
+
+            em = np.array(em.convert('L'), dtype=np.float32)
+
+            if self.cfgs['targe_regression']:
+                bin_em = em / 255.0
+            else:
+                bin_em = np.zeros_like(em)
+                bin_em[np.where(em)] = 1
 
             # Some edge maps have 3 channels some dont
             bin_em = bin_em if bin_em.ndim == 2 else bin_em[:, :, 0]
