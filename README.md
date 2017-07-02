@@ -70,7 +70,7 @@ tensorboard --logdir=<save_dir>
 ```
 
 ## Testing
-Edit the snapshot you want to use for testing in hed/configs/hed.yaml
+Edit the snapshot you want to use for testing in `hed/configs/hed.yaml`
 
 ```
 test_snapshot: <snapshot number>
