@@ -2,10 +2,10 @@
 
 Created by Harsimrat Sandhawalia
 
-Input image                |  Edge maps during training
-:-------------------------:|:-------------------------:
-<img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/35049.jpg" width="480">  |  <img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/animated-7.gif" width="480">
-<img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/201080.jpg" width="480">  |  <img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/animated-9.gif" width="480">
+Input image                |  Final fused Edge maps    | Edge maps from side layers
+:-------------------------:|:-------------------------:|:-------------------------
+<img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/35049.jpg" width="480">  |  <img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/animated-7.gif" width="480"> | <img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/animated-levels-7.gif" width="480">
+<img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/201080.jpg" width="480">  |  <img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/animated-9.gif" width="480"> | <img src="https://github.com/harsimrat-eyeem/holy-edge/blob/master/hed/example-results/animated-levels-9.gif" width="480">
 
 This repository contains tensorflow implementation of the [HED model](https://github.com/s9xie/hed). Details of hyper-paramters are available in the [paper](https://arxiv.org/pdf/1504.06375.pdf)
 
