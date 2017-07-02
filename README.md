@@ -42,7 +42,7 @@ You can train the model youself or you can fetch a pre-trained snapshot provided
 ```
 git lfs fetch && git lfs pull
 ```
-1. Download training data via following
+Download training data via following
 ```
 python run-hed.py --download-data --config-file hed/configs/hed.yaml
 ```
