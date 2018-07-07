@@ -57,7 +57,7 @@ class HEDTester():
 
         filepath = os.path.join(self.cfgs['download_path'], self.cfgs['testing']['list'])
         base = 'datasets/dogscats/train/dogs/'
-        train_list = os.listdir(base)[0:10]
+        train_list = os.listdir(base)[0:1000]
 
         self.io.print_info('Writing PNGs at {}'.format(self.cfgs['test_output']))
 
