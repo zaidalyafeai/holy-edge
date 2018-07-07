@@ -18,7 +18,7 @@ class Vgg16():
         self.cfgs = cfgs
         self.io = IO()
 
-        base_path = os.path.abspath(os.path.dirname(__file__))
+        base_path = 'holyedge/'+os.path.abspath(os.path.dirname(__file__))
         weights_file = os.path.join(base_path, self.cfgs['model_weights_path'])
 
         self.data_dict = np.load(weights_file, encoding='latin1').item()
