@@ -75,7 +75,7 @@ class HEDTester():
     def save_egdemaps(self, em_maps, index):
 
         # Take the edge map from the network from side layers and fuse layer
-        em_maps = [e[0] for e in em_maps]
+        em_maps = [e[0] for e in em_maps][-1]
         em_maps = em_maps + [np.mean(np.array(em_maps), axis=0)]
 
         for idx, em in enumerate(em_maps):
