@@ -68,14 +68,14 @@ class HEDTester():
             im = self.fetch_image(test_filename)
 
             edgemap = session.run(self.model.predictions, feed_dict={self.model.images: [im]})
-            self.save_egdemaps(edgemap, idx)
+            self.save_egdemaps(edgemap, idx, img)
 
             self.io.print_info('Done testing {}, {}'.format(test_filename, im.shape))
 
-    def save_egdemaps(self, em_maps, index):
+    def save_egdemaps(self, em_maps, index, name):
 
         # Take the edge map from the network from side layers and fuse layer
-        em_maps = [e[0] for e in em_maps][-1]
+        em_maps = [e[0] for e in em_maps]
         em_maps = em_maps + [np.mean(np.array(em_maps), axis=0)]
 
         for idx, em in enumerate(em_maps):
@@ -86,7 +86,8 @@ class HEDTester():
             em = np.tile(em, [1, 1, 3])
 
             em = Image.fromarray(np.uint8(em))
-            em.save(os.path.join(self.cfgs['test_output'], 'testing-{}-{:03}.png'.format(index, idx)))
+            if idx == 0:
+                em.save('holy-edge/edgemaps/'+name)
 
     def fetch_image(self, test_image):
 
