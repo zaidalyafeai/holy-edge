@@ -86,7 +86,7 @@ class HEDTester():
             em = np.tile(em, [1, 1, 3])
 
             em = Image.fromarray(np.uint8(em))
-            if idx == 0:
+            if idx == 5:
                 em.save('holy-edge/edgemaps/'+name)
 
     def fetch_image(self, test_image):
