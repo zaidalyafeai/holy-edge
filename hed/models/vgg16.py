@@ -19,8 +19,9 @@ class Vgg16():
         self.io = IO()
 
         base_path = os.path.abspath(os.path.dirname(__file__))
+        print(base_path)
         weights_file = os.path.join(base_path, self.cfgs['model_weights_path'])
-
+        
         self.data_dict = np.load(weights_file, encoding='latin1').item()
         self.io.print_info("Model weights loaded from {}".format(self.cfgs['model_weights_path']))
 
