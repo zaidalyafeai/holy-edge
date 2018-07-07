@@ -56,14 +56,14 @@ class HEDTester():
         self.model.setup_testing(session)
 
         filepath = os.path.join(self.cfgs['download_path'], self.cfgs['testing']['list'])
-        base = 'datasets/dogscats/train/dogs/train/'
+        base = 'datasets/dogscats/train/dogs/'
         train_list = os.listdir(base)[0:10]
 
         self.io.print_info('Writing PNGs at {}'.format(self.cfgs['test_output']))
 
         for idx, img in enumerate(train_list):
 
-            test_filename = os.path.join(base, img)
+            test_filename = base+'/'+img
             print(test_filename)
             im = self.fetch_image(test_filename)
 
