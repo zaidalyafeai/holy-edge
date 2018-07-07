@@ -5,9 +5,9 @@ rar_file: 'http://vcl.ucsd.edu/hed/HED-BSDS.tar'
 # location where HED-BSDS.tar would be downloaded and decompressed (Should already exist)
 download_path: '/home/harsimrat/hed-data'
 # location of snapshot and tensorbaord summary events (Should already exist)
-save_dir: /home/harsimrat/workspace/holy-edge/hed
+save_dir: holy-edge/hed
 # location where to put the generated edgemaps during testing (Should already exist)
-test_output: /nas2/harsimrat/hed-testing-deconv-hist-4/test/model-5000
+test_output: edgemaps 
 # parameters from the paper
 model_weights_path: vgg16.npy
 # training batch size, decide with your GPU size
