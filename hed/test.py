@@ -56,7 +56,7 @@ class HEDTester():
         self.model.setup_testing(session)
 
         filepath = os.path.join(self.cfgs['download_path'], self.cfgs['testing']['list'])
-        train_list = self.io.read_file_list(filepath)
+        train_list = ['0.jpg']
 
         self.io.print_info('Writing PNGs at {}'.format(self.cfgs['test_output']))
 
