@@ -63,7 +63,7 @@ class HEDTester():
         
         for idx, img in enumerate(train_list):
             idx += 1
-            test_filename = base+'/'+img
+            test_filename = dataset+'/'+img
             im = self.fetch_image(test_filename)
 
             edgemap = session.run(self.model.predictions, feed_dict={self.model.images: [im]})
