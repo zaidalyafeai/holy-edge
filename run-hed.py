@@ -11,7 +11,6 @@ from hed.train import HEDTrainer
 def get_session(gpu_fraction):
 
     '''Assume that you have 6GB of GPU memory and want to allocate ~2GB'''
-    print(gpu_fraction)
     num_threads = int(6)
     gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=gpu_fraction)
 
@@ -58,7 +57,7 @@ if __name__ == '__main__':
     parser.add_argument('--test', dest='run_test', action='store_true', default=False, help='Launch testing on a list of images')
     parser.add_argument('--download-data', dest='download_data', action='store_true', default=False, help='Download training data')
     parser.add_argument('--gpu-limit', dest='gpu_limit', type=float, default=1.0, help='Use fraction of GPU memory (Useful with TensorFlow backend)')
-    parser.add_argument('--dataset', dest='gpu_limit', type=str, default='dataset', help='location of the dataset to test')
+    parser.add_argument('--dataset', dest='dataset', type=str, default='dataset', help='location of the dataset to test')
     args = parser.parse_args()
 
     main(args)
