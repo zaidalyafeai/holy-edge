@@ -60,18 +60,17 @@ class HEDTester():
         train_list = os.listdir(base)
 
         self.io.print_info('Writing PNGs at {}'.format(self.cfgs['test_output']))
-
+        
         for idx, img in enumerate(train_list):
-
+            idx += 1
             test_filename = base+'/'+img
             print(test_filename)
             im = self.fetch_image(test_filename)
 
             edgemap = session.run(self.model.predictions, feed_dict={self.model.images: [im]})
             self.save_egdemaps(edgemap, idx, img)
-
-            self.io.print_info('Done testing {}, {}'.format(test_filename, im.shape))
-
+            if idx % 100 == 0:
+                print 'processing img ', idx 
     def save_egdemaps(self, em_maps, index, name):
 
         # Take the edge map from the network from side layers and fuse layer
