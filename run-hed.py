@@ -58,7 +58,7 @@ if __name__ == '__main__':
     parser.add_argument('--test', dest='run_test', action='store_true', default=False, help='Launch testing on a list of images')
     parser.add_argument('--download-data', dest='download_data', action='store_true', default=False, help='Download training data')
     parser.add_argument('--gpu-limit', dest='gpu_limit', type=float, default=1.0, help='Use fraction of GPU memory (Useful with TensorFlow backend)')
-
+    parser.add_argument('--dataset', dest='gpu_limit', type=str, default='dataset', help='location of the dataset to test')
     args = parser.parse_args()
 
     main(args)
