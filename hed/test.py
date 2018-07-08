@@ -48,7 +48,7 @@ class HEDTester():
             self.io.print_error('Error setting up VGG-16 model, {}'.format(err))
             self.init = False
 
-    def run(self, session):
+    def run(self, session, dataset):
 
         if not self.init:
             return
@@ -57,7 +57,7 @@ class HEDTester():
 
         filepath = os.path.join(self.cfgs['download_path'], self.cfgs['testing']['list'])
         
-        train_list = os.listdir(self.cfgs['dataset'])
+        train_list = os.listdir(dataset)
 
         self.io.print_info('Writing PNGs at {}'.format(self.cfgs['test_output']))
         
