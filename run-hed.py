@@ -21,7 +21,7 @@ def get_session(gpu_fraction):
 
 
 def main(args):
-
+    
     if not (args.run_train or args.run_test or args.download_data):
         print 'Set atleast one of the options --train | --test | --download-data'
         parser.print_help()
@@ -40,7 +40,7 @@ def main(args):
 
         tester = HEDTester(args.config_file)
         tester.setup(session)
-        tester.run(session)
+        tester.run(session, args.dataset)
 
     if args.download_data:
 
