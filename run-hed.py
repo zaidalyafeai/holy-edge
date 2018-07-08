@@ -11,7 +11,7 @@ from hed.train import HEDTrainer
 def get_session(gpu_fraction):
 
     '''Assume that you have 6GB of GPU memory and want to allocate ~2GB'''
-
+    print(gpu_fraction)
     num_threads = int(6)
     gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=gpu_fraction)
 
