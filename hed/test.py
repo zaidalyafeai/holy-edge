@@ -76,7 +76,8 @@ class HEDTester():
         em_maps = em_maps + [np.mean(np.array(em_maps), axis=0)]
 
         for idx, em in enumerate(em_maps):
-
+            if idx == 5:
+                sio.savemat('holy-edge/edgemaps/'+name[:-4] + '.mat', {'predict':em})
             em[em < self.cfgs['testing_threshold']] = 0.0
 
             em = 255.0 * (1.0 - em)
