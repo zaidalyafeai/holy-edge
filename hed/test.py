@@ -9,7 +9,7 @@ import cStringIO
 import numpy as np
 from PIL import Image
 import tensorflow as tf
-
+import scipy.io as sio
 from hed.models.vgg16 import Vgg16
 from hed.utils.io import IO
 
